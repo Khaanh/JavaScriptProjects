@@ -1,5 +1,12 @@
 const inputBox = document.querySelector("#inputBox");
 const listContainer = document.querySelector("#listContainer");
+const titleEl = document.querySelector("#title");
+const { animate } = anime;
+
+document.addEventListener("keypress", function (e) {
+	if (e.code !== "Enter") return;
+	addTask();
+});
 
 document.addEventListener("DOMContentLoaded", function (e) {
 	inputBox.focus();
@@ -29,6 +36,7 @@ listContainer.addEventListener(
 		} else if (e.target.tagName === "SPAN") {
 			e.target.parentElement.remove();
 			saveData();
+			inputBox.focus();
 		}
 	},
 	false,
@@ -43,7 +51,8 @@ function showTask() {
 }
 showTask();
 
-document.addEventListener("keypress", function (e) {
-	if (e.code !== "Enter") return;
-	addTask();
+animate(titleEl, {
+	opacity: { from: 0 },
+	translateY: { from: "-50px" },
+	duration: 700,
 });

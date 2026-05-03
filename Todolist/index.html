@@ -9,7 +9,9 @@
 	<body>
 		<div class="container">
 			<div class="todo-app">
-				<h2>To-Do List <img src="./img/icon.png" alt="icon" /></h2>
+				<h2 id="title" class="title">
+					To-Do List <img src="./img/icon.png" alt="icon" />
+				</h2>
 				<div class="row">
 					<input type="text" id="inputBox" placeholder="Add your text" />
 					<button onclick="addTask()">Add</button>
@@ -22,6 +24,8 @@
 				</ul>
 			</div>
 		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/animejs/dist/bundles/anime.umd.min.js"></script>
 		<script src="./index.js"></script>
 	</body>
 </html>
