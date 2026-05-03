@@ -38,3 +38,8 @@ function showTask() {
 	listContainer.innerHTML = localStorage.getItem("data");
 }
 showTask();
+
+document.addEventListener("keypress", function (e) {
+	if (e.code !== "Enter") return;
+	addTask();
+});
