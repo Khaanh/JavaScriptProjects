@@ -1,6 +1,10 @@
 const inputBox = document.querySelector("#inputBox");
 const listContainer = document.querySelector("#listContainer");
 
+document.addEventListener("DOMContentLoaded", function (e) {
+	inputBox.focus();
+});
+
 function addTask() {
 	if (inputBox.value === "") {
 		alert("You must write something");
