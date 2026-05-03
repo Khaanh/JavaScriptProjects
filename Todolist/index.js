@@ -1,6 +1,8 @@
 const inputBox = document.querySelector("#inputBox");
 const listContainer = document.querySelector("#listContainer");
 const titleEl = document.querySelector("#title");
+const btnTask = document.querySelector("#btnTask");
+
 const { animate } = anime;
 
 document.addEventListener("keypress", function (e) {
@@ -11,6 +13,32 @@ document.addEventListener("keypress", function (e) {
 document.addEventListener("DOMContentLoaded", function (e) {
 	inputBox.focus();
 });
+
+btnTask.addEventListener("click", addTask);
+
+listContainer.addEventListener(
+	"click",
+	function (e) {
+		if (e.target.tagName === "LI") {
+			e.target.classList.toggle("checked");
+			saveData();
+		} else if (e.target.tagName === "SPAN") {
+			animate(e.target.parentElement, {
+				x: {
+					to: "150px",
+					ease: "outCubic",
+				},
+				delay: 300,
+				opacity: 0,
+				onComplete: e.target.parentElement.remove(),
+			});
+			// e.target.parentElement.remove();
+			saveData();
+			inputBox.focus();
+		}
+	},
+	false,
+);
 
 function addTask() {
 	if (inputBox.value === "") {
@@ -24,23 +52,9 @@ function addTask() {
 		li.appendChild(span);
 	}
 	inputBox.value = "";
+	inputBox.focus();
 	saveData();
 }
-
-listContainer.addEventListener(
-	"click",
-	function (e) {
-		if (e.target.tagName === "LI") {
-			e.target.classList.toggle("checked");
-			saveData();
-		} else if (e.target.tagName === "SPAN") {
-			e.target.parentElement.remove();
-			saveData();
-			inputBox.focus();
-		}
-	},
-	false,
-);
 
 function saveData() {
 	localStorage.setItem("data", listContainer.innerHTML);
@@ -54,5 +68,14 @@ showTask();
 animate(titleEl, {
 	opacity: { from: 0 },
 	translateY: { from: "-50px" },
-	duration: 700,
+});
+
+animate(btnTask, {
+	opacity: { from: 0 },
+	translateX: { from: "150px" },
+});
+
+animate(inputBox, {
+	translateX: { from: "-150px" },
+	opacity: { from: 0 },
 });
