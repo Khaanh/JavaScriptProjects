@@ -4,6 +4,7 @@ const titleEl = document.querySelector("#title");
 const btnTask = document.querySelector("#btnTask");
 
 const { animate } = anime;
+let parentAnimEl;
 
 document.addEventListener("keypress", function (e) {
 	if (e.code !== "Enter") return;
@@ -23,16 +24,18 @@ listContainer.addEventListener(
 			e.target.classList.toggle("checked");
 			saveData();
 		} else if (e.target.tagName === "SPAN") {
-			animate(e.target.parentElement, {
-				x: {
-					to: "150px",
-					ease: "outCubic",
-				},
-				delay: 300,
+			parentAnimEl = e.target.parentElement;
+			animate(parentAnimEl, {
 				opacity: 0,
-				onComplete: e.target.parentElement.remove(),
+				x: "20rem",
+				delay: 200,
+				duration: 550,
+				onComplete: (self) => {
+					parentAnimEl.remove();
+					saveData();
+				},
 			});
-			// e.target.parentElement.remove();
+
 			saveData();
 			inputBox.focus();
 		}
