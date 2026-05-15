@@ -2,6 +2,7 @@ const inputBox = document.querySelector("#inputBox");
 const listContainer = document.querySelector("#listContainer");
 const titleEl = document.querySelector("#title");
 const btnTask = document.querySelector("#btnTask");
+const progressBar = document.querySelector("#progressBar");
 
 const { animate } = anime;
 let parentAnimEl;
@@ -33,6 +34,8 @@ listContainer.addEventListener(
 				onComplete: (self) => {
 					parentAnimEl.remove();
 					saveData();
+
+					console.log(self);
 				},
 			});
 
@@ -68,6 +71,13 @@ function showTask() {
 }
 showTask();
 
+progressBar.addEventListener("click", function (e) {
+	console.log(e);
+	console.log(e.target.value);
+	console.log(e.target.max);
+});
+
+//Animation
 animate(titleEl, {
 	opacity: { from: 0 },
 	translateY: { from: "-50px" },
