@@ -3,9 +3,11 @@ const listContainer = document.querySelector("#listContainer");
 const titleEl = document.querySelector("#title");
 const btnTask = document.querySelector("#btnTask");
 const progressBar = document.querySelector("#progressBar");
+const progressIcon = document.querySelector("[data-js='progressIcon']");
 
 const { animate } = anime;
 let parentAnimEl;
+let progressScore = 0;
 
 document.addEventListener("keypress", function (e) {
 	if (e.code !== "Enter") return;
@@ -72,9 +74,16 @@ function showTask() {
 showTask();
 
 progressBar.addEventListener("click", function (e) {
-	console.log(e);
-	console.log(e.target.value);
-	console.log(e.target.max);
+	let { max: maxValue, value } = e.target;
+
+	if (value >= maxValue) return;
+
+	value = e.target.value += 10;
+	progressIcon.style.left = `${value}%`;
+	progressIcon.style.transform = "translateX(-17px)";
+
+	console.log(maxValue);
+	console.log(value);
 });
 
 //Animation

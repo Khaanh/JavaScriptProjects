@@ -12,16 +12,23 @@
 				<label for="progressBar" class="progress-lb">
 					<div class="progress-wrap">
 						<span class="progress-indicator">0%</span>
-						<img src="./img/snail.png" alt="icon" class="progress-icon" />
 						<div class="progress-control">
-							<progress
-								class="progress-bar"
-								id="progressBar"
-								max="100"
-								value="0"
-							>
-								70%
-							</progress>
+							<img
+								src="./img/snail.png"
+								alt="icon"
+								class="progress-icon"
+								data-js="progressIcon"
+							/>
+							<div class="progress-inner">
+								<progress
+									class="progress-bar"
+									id="progressBar"
+									max="100"
+									value="0"
+								>
+									70%
+								</progress>
+							</div>
 						</div>
 						<span class="progress-indicator">100%</span>
 					</div>
