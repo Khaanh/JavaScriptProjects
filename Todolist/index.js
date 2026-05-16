@@ -66,12 +66,21 @@ function addTask() {
 
 function saveData() {
 	localStorage.setItem("data", listContainer.innerHTML);
+
+	let tasks = listContainer.querySelectorAll("li").length;
+	getStep(tasks);
 }
 
 function showTask() {
 	listContainer.innerHTML = localStorage.getItem("data");
 }
 showTask();
+
+function getStep(taskCount) {
+	console.log(100 / taskCount);
+
+	return 100 / taskCount;
+}
 
 progressBar.addEventListener("click", function (e) {
 	let { max: maxValue, value } = e.target;
