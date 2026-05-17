@@ -8,6 +8,7 @@ const progressIcon = document.querySelector("[data-js='progressIcon']");
 const { animate } = anime;
 let parentAnimEl;
 let progressScore = 0;
+let steps = 0;
 
 document.addEventListener("keypress", function (e) {
 	if (e.code !== "Enter") return;
@@ -25,6 +26,7 @@ listContainer.addEventListener(
 	function (e) {
 		if (e.target.tagName === "LI") {
 			e.target.classList.toggle("checked");
+
 			saveData();
 		} else if (e.target.tagName === "SPAN") {
 			parentAnimEl = e.target.parentElement;
@@ -40,8 +42,10 @@ listContainer.addEventListener(
 					console.log(self);
 				},
 			});
+			console.log(e.target.parentElement);
 
 			saveData();
+			moveSnail();
 			inputBox.focus();
 		}
 	},
@@ -68,7 +72,7 @@ function saveData() {
 	localStorage.setItem("data", listContainer.innerHTML);
 
 	let tasks = listContainer.querySelectorAll("li").length;
-	getStep(tasks);
+	steps = getStep(tasks);
 }
 
 function showTask() {
@@ -82,18 +86,11 @@ function getStep(taskCount) {
 	return 100 / taskCount;
 }
 
-progressBar.addEventListener("click", function (e) {
-	let { max: maxValue, value } = e.target;
-
-	if (value >= maxValue) return;
-
-	value = e.target.value += 10;
-	progressIcon.style.left = `${value}%`;
+function moveSnail(isCompleted) {
+	progressBar.value = steps;
+	progressIcon.style.left = `${steps}%`;
 	progressIcon.style.transform = "translateX(-17px)";
-
-	console.log(maxValue);
-	console.log(value);
-});
+}
 
 //Animation
 animate(titleEl, {
