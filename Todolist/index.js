@@ -6,7 +6,7 @@ const progressBar = document.querySelector("#progressBar");
 const progressIcon = document.querySelector("[data-js='progressIcon']");
 
 const { animate } = anime;
-let parentAnimEl;
+let parentEl;
 let progressScore = 0;
 let steps = 0;
 
@@ -29,23 +29,26 @@ listContainer.addEventListener(
 
 			saveData();
 		} else if (e.target.tagName === "SPAN") {
-			parentAnimEl = e.target.parentElement;
-			animate(parentAnimEl, {
+			parentEl = e.target.parentElement;
+			animate(parentEl, {
 				opacity: 0,
 				x: "20rem",
 				delay: 200,
 				duration: 550,
 				onComplete: (self) => {
-					parentAnimEl.remove();
+					parentEl.remove();
 					saveData();
 
 					console.log(self);
 				},
 			});
 			console.log(e.target.parentElement);
-
+			if (parentEl.classList.contains("checked")) {
+				moveSnail(Boolean(parentEl));
+			} else {
+				parentEl.remove();
+			}
 			saveData();
-			moveSnail();
 			inputBox.focus();
 		}
 	},
@@ -70,7 +73,9 @@ function addTask() {
 
 function saveData() {
 	localStorage.setItem("data", listContainer.innerHTML);
+}
 
+function getData() {
 	let tasks = listContainer.querySelectorAll("li").length;
 	steps = getStep(tasks);
 }
@@ -87,6 +92,9 @@ function getStep(taskCount) {
 }
 
 function moveSnail(isCompleted) {
+	console.log("isCompleted:", isCompleted);
+	if (!isCompleted) return;
+
 	progressBar.value = steps;
 	progressIcon.style.left = `${steps}%`;
 	progressIcon.style.transform = "translateX(-17px)";
