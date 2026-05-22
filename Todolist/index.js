@@ -1,3 +1,4 @@
+const { animate, splitText, stagger, utils } = anime;
 const inputBox = document.querySelector("#inputBox");
 const inputMaxValue = Number(inputBox.max);
 const listContainer = document.querySelector("#listContainer");
@@ -5,8 +6,10 @@ const titleEl = document.querySelector("#title");
 const btnTask = document.querySelector("#btnTask");
 const progressBar = document.querySelector("#progressBar");
 const progressIcon = document.querySelector("[data-js='progressIcon']");
+// const textAnimation = document.querySelector("#textAnimation");
+// const splitText = textAnimation.innerHTML.split("");
+const { chars } = splitText("#textAnimation", { words: false, chars: true });
 
-const { animate } = anime;
 let parentEl;
 let progressScore = 0;
 let steps = 0;
@@ -61,6 +64,7 @@ function addTask() {
 	if (inputMaxValue <= listContainer.querySelectorAll("li").length) {
 		btnTask.setAttribute("disabled", true);
 		inputBox.setAttribute("disabled", true);
+		animFunc();
 		return;
 	}
 
@@ -125,3 +129,29 @@ animate(inputBox, {
 	translateX: { from: "-150px" },
 	opacity: { from: 0 },
 });
+
+function animFunc() {
+	animate(chars, {
+		y: [
+			{ to: "-35px", ease: "outExpo", duration: 600 },
+			{ to: 0, ease: "outBounce", duration: 800, delay: 100 },
+		],
+		rotate: {
+			from: "-1turn",
+			delay: 0,
+		},
+		opacity: { from: 0 },
+		delay: stagger(50),
+		ease: "inOutCirc",
+		loopDelay: 1000,
+		// loop: true,
+	});
+}
+// const anim = () => textAnimation.play();
+
+// const [$test] = utils.$(".test");
+// const animTe = aim.play();
+
+// $test.addEventListener("click", animTe);
+
+// console.log(aim);

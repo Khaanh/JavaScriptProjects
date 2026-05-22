@@ -53,6 +53,9 @@ img {
 	bottom: -25px;
 	left: 50%;
 	transform: translateX(-60%);
+	color: #ee4732;
+	font-size: 20px;
+	font-style: italic;
 }
 
 input {
