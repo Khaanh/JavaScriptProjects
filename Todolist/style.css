@@ -45,6 +45,14 @@ img {
 	border-radius: 30px;
 	padding-left: 20px;
 	margin-bottom: 25px;
+	position: relative;
+}
+
+.text {
+	position: absolute;
+	bottom: -25px;
+	left: 50%;
+	transform: translateX(-60%);
 }
 
 input {
@@ -65,6 +73,12 @@ button {
 	font-size: 16px;
 	cursor: pointer;
 	border-radius: 40px;
+}
+
+button:disabled,
+input:disabled {
+	opacity: 0.7;
+	pointer-events: none;
 }
 
 ul li {

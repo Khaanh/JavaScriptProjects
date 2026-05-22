@@ -39,8 +39,16 @@
 					To-Do List <img src="./img/icon.png" alt="icon" />
 				</h2>
 				<div class="row">
-					<input type="text" id="inputBox" placeholder="Add your text" />
+					<input
+						type="text"
+						id="inputBox"
+						max="5"
+						placeholder="Add your text"
+					/>
 					<button id="btnTask">Add</button>
+					<div class="text">
+						<p>You've reached the limit</p>
+					</div>
 				</div>
 
 				<ul id="listContainer">

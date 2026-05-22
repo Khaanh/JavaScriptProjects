@@ -1,4 +1,5 @@
 const inputBox = document.querySelector("#inputBox");
+const inputMaxValue = Number(inputBox.max);
 const listContainer = document.querySelector("#listContainer");
 const titleEl = document.querySelector("#title");
 const btnTask = document.querySelector("#btnTask");
@@ -45,10 +46,9 @@ listContainer.addEventListener(
 			console.log(e.target.parentElement);
 			if (parentEl.classList.contains("checked")) {
 				moveSnail(Boolean(parentEl));
-			} else {
-				parentEl.remove();
 			}
 			saveData();
+			getData();
 			inputBox.focus();
 		}
 	},
@@ -56,6 +56,14 @@ listContainer.addEventListener(
 );
 
 function addTask() {
+	console.log(typeof inputBox.max);
+
+	if (inputMaxValue <= listContainer.querySelectorAll("li").length) {
+		btnTask.setAttribute("disabled", true);
+		inputBox.setAttribute("disabled", true);
+		return;
+	}
+
 	if (inputBox.value === "") {
 		alert("You must write something");
 	} else {
@@ -73,6 +81,8 @@ function addTask() {
 
 function saveData() {
 	localStorage.setItem("data", listContainer.innerHTML);
+	// let tasks = listContainer.querySelectorAll("li").length;
+	// steps = getStep(tasks);
 }
 
 function getData() {
