@@ -43,15 +43,15 @@ listContainer.addEventListener(
 					parentEl.remove();
 					saveData();
 
-					console.log(self);
+					// console.log(self);
 				},
 			});
-			console.log(e.target.parentElement);
+			// console.log(e.target.parentElement);
 			if (parentEl.classList.contains("checked")) {
 				moveSnail(Boolean(parentEl));
 			}
 			saveData();
-			getData();
+			// getData();
 			inputBox.focus();
 		}
 	},
@@ -59,12 +59,15 @@ listContainer.addEventListener(
 );
 
 function addTask() {
-	console.log(typeof inputBox.max);
+	// console.log(typeof inputBox.max);
 
-	if (inputMaxValue <= listContainer.querySelectorAll("li").length) {
+	if (listContainer.querySelectorAll("li").length == inputMaxValue) {
 		btnTask.setAttribute("disabled", true);
 		inputBox.setAttribute("disabled", true);
-		animFunc();
+		getData();
+		// notificationError();
+		notificationError.play();
+		inputBox.value = "";
 		return;
 	}
 
@@ -91,6 +94,8 @@ function saveData() {
 
 function getData() {
 	let tasks = listContainer.querySelectorAll("li").length;
+	console.log("tasks:", tasks);
+
 	steps = getStep(tasks);
 }
 
@@ -106,7 +111,7 @@ function getStep(taskCount) {
 }
 
 function moveSnail(isCompleted) {
-	console.log("isCompleted:", isCompleted);
+	// console.log("isCompleted:", isCompleted);
 	if (!isCompleted) return;
 
 	progressBar.value = steps;
@@ -130,23 +135,29 @@ animate(inputBox, {
 	opacity: { from: 0 },
 });
 
-function animFunc() {
-	animate(chars, {
-		y: [
-			{ to: "-35px", ease: "outExpo", duration: 600 },
-			{ to: 0, ease: "outBounce", duration: 800, delay: 100 },
-		],
-		rotate: {
-			from: "-1turn",
-			delay: 0,
-		},
-		opacity: { from: 0 },
-		delay: stagger(50),
-		ease: "inOutCirc",
-		loopDelay: 1000,
-		// loop: true,
-	});
-}
+// function animFunc() {
+const notificationError = animate(chars, {
+	y: [
+		{ to: "-35px", ease: "outExpo", duration: 600 },
+		{ to: 0, ease: "outBounce", duration: 800, delay: 100 },
+	],
+	rotate: {
+		from: "-1turn",
+		delay: 0,
+	},
+	opacity: { from: 0 },
+	delay: stagger(50),
+	ease: "inOutCirc",
+	loopDelay: 1000,
+	autoplay: false,
+	// loop: true,
+	//
+	// loop: true,
+});
+// const notificationError = () => errorText.play();
+
+// notificationError();
+// }
 // const anim = () => textAnimation.play();
 
 // const [$test] = utils.$(".test");
