@@ -61,7 +61,7 @@ listContainer.addEventListener(
 function addTask() {
 	// console.log(typeof inputBox.max);
 
-	if (listContainer.querySelectorAll("li").length == inputMaxValue) {
+	if (listContainer.querySelectorAll("li").length >= inputMaxValue) {
 		btnTask.setAttribute("disabled", true);
 		inputBox.setAttribute("disabled", true);
 		getData();
@@ -93,7 +93,7 @@ function saveData() {
 }
 
 function getData() {
-	let tasks = listContainer.querySelectorAll("li").length;
+	let tasks = listContainer.querySelectorAll("li");
 	console.log("tasks:", tasks);
 
 	steps = getStep(tasks);
@@ -114,8 +114,8 @@ function moveSnail(isCompleted) {
 	// console.log("isCompleted:", isCompleted);
 	if (!isCompleted) return;
 
-	progressBar.value = steps;
-	progressIcon.style.left = `${steps}%`;
+	progressBar.value = 50;
+	progressIcon.style.left = `${progressBar.value}%`;
 	progressIcon.style.transform = "translateX(-17px)";
 }
 
